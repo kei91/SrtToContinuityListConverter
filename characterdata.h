@@ -18,6 +18,11 @@ public:
 
     void SetGender(Gender gender);
 
+    bool operator<(const CharacterData& compare) const;
+    bool operator==(const CharacterData& compare);
+    bool operator!=(const CharacterData& compare);
+    CharacterData& operator=(const CharacterData& characterData);
+
 private:
     QString m_Name;
     Gender  m_Gender;

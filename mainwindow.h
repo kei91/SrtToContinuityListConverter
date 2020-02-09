@@ -20,6 +20,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    CharacterData *GetCharacter(QString name);
 
 signals:
     void OnFileNameReceived(const QString&);

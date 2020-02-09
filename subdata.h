@@ -9,7 +9,7 @@ class CharacterData;
 class SubData
 {
 public:
-    SubData();
+    SubData(quint32 number, QTime startTime, CharacterData* character, QString line);
 
 private:
     quint32        m_Number;

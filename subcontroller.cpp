@@ -2,7 +2,12 @@
 #include "mainwindow.h"
 #include <QDebug>
 #include <QFile>
+#include <QStringList>
 #include <QTextStream>
+#include <QTime>
+
+#define START_TIME_POSITION       0
+#define AMOUNT_OF_DIGITS_FOR_TIME 8
 
 void SubController::SetMainWindow(MainWindow* MainWindow)
 {
@@ -11,22 +16,54 @@ void SubController::SetMainWindow(MainWindow* MainWindow)
 
 void SubController::ExtractDataFromFile(const QString& Filename)
 {
-    QRegExp re("\\d*");
-    QString PrevLine("");
+    QRegExp reLineNumber("\\d*");
+    QString prevLine("");
     QFile inputFile(Filename);
+
     if (inputFile.open(QIODevice::ReadOnly))
     {
        QTextStream in(&inputFile);
        while (!in.atEnd())
        {
           QString line = in.readLine();
-          qDebug() << "line" << line << endl;
 
-          if (re.exactMatch(line) && PrevLine == "")
-             qDebug() << "new sub" << endl;
+          if (reLineNumber.exactMatch(line) && prevLine == "")
+          {
+              quint32 lineNumber = line.toUInt();
+              qDebug() << "lineNumber" << lineNumber << endl;
 
-          PrevLine = line;
+              if (in.atEnd())
+                  break;
+
+              line = in.readLine();
+              QTime startTime = QTime::fromString(line.mid(START_TIME_POSITION, AMOUNT_OF_DIGITS_FOR_TIME), "hh:mm:ss");
+
+              qDebug() << "time" << startTime.hour() << " " << startTime.minute() << " " << startTime.second() << endl;
+
+              while (!in.atEnd())
+              {
+                  line = in.readLine();
+
+                  if (line == "")
+                      break;
+
+                  qint32 indexEndName = line.indexOf("]");
+                  if (indexEndName != -1 && indexEndName + 1 < line.size())
+                  {
+                    QString name = line.mid(1, indexEndName - 1);
+                    QString text = line.mid(indexEndName + 1, line.size()).simplified();
+
+                    qDebug() << "name" << name << endl;
+                    qDebug() << "text" << text << endl;
+
+                    m_Sub.push_back(SubData(lineNumber, startTime, m_MainWindow->GetCharacter(name), line));
+                  }
+              }
+          }
+
+          prevLine = line;
        }
+
        inputFile.close();
     }
 }

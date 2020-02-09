@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "utils.h"
 #include "characterdata.h"
+#include <set>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -18,6 +19,14 @@ MainWindow::~MainWindow()
 {
     disconnect(this, &MainWindow::OnFileNameReceived, &m_SubController, &SubController::ExtractDataFromFile);
     delete ui;
+}
+
+CharacterData *MainWindow::GetCharacter(QString name)
+{
+    std::pair<std::set<CharacterData>::iterator, bool> result;
+    m_Characters.insert(CharacterData(name));
+
+    return const_cast<CharacterData *>(&(*result.first));
 }
 
 void MainWindow::OnBrowseClicked()
