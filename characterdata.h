@@ -10,20 +10,20 @@ enum class Gender
 };
 
 // represents the main character data
-class CharacterData
+class CCharacterData
 {
 public:
-    explicit CharacterData(QString &Name);
-    explicit CharacterData(QString &Name, Gender gender);
+    explicit CCharacterData(QString &Name);
+    explicit CCharacterData(QString &Name, Gender gender);
 
     void SetGender(Gender gender);
 
-    bool operator<(const CharacterData& compare) const;
-    bool operator==(const CharacterData& compare);
-    bool operator!=(const CharacterData& compare);
-    CharacterData& operator=(const CharacterData& characterData);
+    bool operator<(const CCharacterData& compare) const;
+    bool operator==(const CCharacterData& compare);
+    bool operator!=(const CCharacterData& compare);
+    CCharacterData& operator=(const CCharacterData& characterData);
 
-private:
+public:
     QString m_Name;
     Gender  m_Gender;
 };

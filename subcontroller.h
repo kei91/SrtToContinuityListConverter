@@ -8,17 +8,18 @@
 class MainWindow;
 
 // Will handle parsing part and storing part
-class SubController: public QObject
+class CSubController: public QObject
 {
 public:
     void SetMainWindow(MainWindow* MainWindow);
+    const std::vector<CSubData>& GetSubData() const;
 
 public slots:
     void ExtractDataFromFile(const QString& Filename);
 
 private:
-    std::vector<SubData> m_Sub;
-    MainWindow*          m_MainWindow;
+    std::vector<CSubData> m_Sub;
+    MainWindow*           m_MainWindow;
 };
 
 #endif // SUBCONTROLLER_H

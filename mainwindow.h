@@ -10,7 +10,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class CharacterData;
+class CCharacterData;
 
 class MainWindow : public QMainWindow
 {
@@ -20,20 +20,22 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    CharacterData *GetCharacter(QString name);
+    CCharacterData *GetCharacter(QString name);
 
 signals:
     void OnFileNameReceived(const QString&);
+    void OnExportRequired(const QString&, const std::vector<CSubData>& SubData);
 
 private slots:
     void OnBrowseClicked();
+    void OnExportToDocClicked();
 
 private:
     Ui::MainWindow *ui;
 
-    std::set<CharacterData> m_Characters;
-    SubController           m_SubController;
-    DocController           m_DocController;
+    std::set<CCharacterData> m_Characters;
+    CSubController           m_SubController;
+    CDocController           m_DocController;
 
 };
 #endif // MAINWINDOW_H

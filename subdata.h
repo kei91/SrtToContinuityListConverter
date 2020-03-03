@@ -4,18 +4,18 @@
 #include <QString>
 #include <QTime>
 
-class CharacterData;
+class CCharacterData;
 
-class SubData
+class CSubData
 {
 public:
-    SubData(quint32 number, QTime startTime, CharacterData* character, QString line);
+    CSubData(quint32 number, QTime startTime, CCharacterData* character, QString line);
 
-private:
-    quint32        m_Number;
-    QTime          m_StartTime;
-    CharacterData* m_Character;
-    QString        m_Line;
+public:
+    quint32         m_Number;
+    QTime           m_StartTime;
+    CCharacterData* m_Character;
+    QString         m_Line;
 };
 
 #endif // SUBDATA_H

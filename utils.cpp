@@ -10,3 +10,13 @@ const QString Utils::GetFileName()
                                 QFileDialog::tr("Subtitles (*.srt)")
                             );
 }
+
+const QString Utils::GetSaveFileName()
+{
+    return QFileDialog::getSaveFileName(
+                                nullptr,
+                                QFileDialog::tr("Save File"),
+                                QDir::currentPath(),
+                                QFileDialog::tr("Doc (*.doc)")
+                            );
+}

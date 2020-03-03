@@ -1,7 +1,7 @@
 #include "subdata.h"
 #include "characterdata.h"
 
-SubData::SubData(quint32 number, QTime startTime, CharacterData* character, QString line) :
+CSubData::CSubData(quint32 number, QTime startTime, CCharacterData* character, QString line) :
     m_Number(number),
     m_StartTime(startTime),
     m_Character(character),

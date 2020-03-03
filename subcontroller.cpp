@@ -9,12 +9,17 @@
 #define START_TIME_POSITION       0
 #define AMOUNT_OF_DIGITS_FOR_TIME 8
 
-void SubController::SetMainWindow(MainWindow* MainWindow)
+void CSubController::SetMainWindow(MainWindow* MainWindow)
 {
     m_MainWindow = MainWindow;
 }
 
-void SubController::ExtractDataFromFile(const QString& Filename)
+const std::vector<CSubData>& CSubController::GetSubData() const
+{
+    return m_Sub;
+}
+
+void CSubController::ExtractDataFromFile(const QString& Filename)
 {
     QRegExp reLineNumber("\\d*");
     QString prevLine("");
@@ -56,7 +61,7 @@ void SubController::ExtractDataFromFile(const QString& Filename)
                     qDebug() << "name" << name << endl;
                     qDebug() << "text" << text << endl;
 
-                    m_Sub.push_back(SubData(lineNumber, startTime, m_MainWindow->GetCharacter(name), line));
+                    m_Sub.push_back(CSubData(lineNumber, startTime, m_MainWindow->GetCharacter(name), text));
                   }
               }
           }

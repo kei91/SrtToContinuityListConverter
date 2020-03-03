@@ -27,6 +27,19 @@
      <string>Browse...</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="ExportToDoc">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>60</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ExportToDoc</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -58,8 +71,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>ExportToDoc</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnExportToDocClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>282</x>
+     <y>109</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>384</x>
+     <y>363</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>OnBrowseClicked()</slot>
+  <slot>OnExportToDocClicked()</slot>
  </slots>
 </ui>
