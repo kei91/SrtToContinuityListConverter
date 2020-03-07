@@ -71,4 +71,6 @@ void CSubController::ExtractDataFromFile(const QString& Filename)
 
        inputFile.close();
     }
+
+    m_MainWindow->UpdateTable();
 }

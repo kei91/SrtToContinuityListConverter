@@ -31,7 +31,7 @@ private:
     void InsertColumn(QXmlStreamWriter& XMLWriter, const CellData& CellDataElement);
 
 public slots:
-    void ConvertSubDataToDoc(const QString& FileName, const std::vector<CSubData>& SubData);
+    void ConvertSubDataToDoc(const QString& FileName, const QString& StrTitle, const std::vector<CSubData>& SubData);
 
 private:
     MainWindow* m_MainWindow;

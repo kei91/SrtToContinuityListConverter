@@ -22,13 +22,16 @@ public:
 
     CCharacterData *GetCharacter(QString name);
 
+    void UpdateTable();
+
 signals:
     void OnFileNameReceived(const QString&);
-    void OnExportRequired(const QString&, const std::vector<CSubData>& SubData);
+    void OnExportRequired(const QString&, const QString&, const std::vector<CSubData>& SubData);
 
 private slots:
     void OnBrowseClicked();
     void OnExportToDocClicked();
+    void OnNamesTableCellClicked(int row, int column);
 
 private:
     Ui::MainWindow *ui;

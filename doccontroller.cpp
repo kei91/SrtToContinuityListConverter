@@ -7,13 +7,14 @@
 #include <QTextStream>
 
 #include <QXmlStreamWriter>
+#include <QMessageBox>
 
 void CDocController::SetMainWindow(MainWindow* MainWindow)
 {
     m_MainWindow = MainWindow;
 }
 
-void CDocController::ConvertSubDataToDoc(const QString& FileName, const std::vector<CSubData>& SubData)
+void CDocController::ConvertSubDataToDoc(const QString& FileName, const QString& StrTitle, const std::vector<CSubData>& SubData)
 {
     QFile file(FileName);
     file.open(QIODevice::WriteOnly);
@@ -30,7 +31,7 @@ void CDocController::ConvertSubDataToDoc(const QString& FileName, const std::vec
     xmlWriter.writeAttribute("xmlns:fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
     StartElement(xmlWriter, "w:r");
     StartElement(xmlWriter, "w:t");
-    xmlWriter.writeCharacters("test");
+    xmlWriter.writeCharacters(StrTitle);
     EndElement(xmlWriter);
     EndElement(xmlWriter);
     EndElement(xmlWriter);
@@ -91,7 +92,7 @@ void CDocController::ConvertSubDataToDoc(const QString& FileName, const std::vec
         qDebug() << "line" << data.m_Line << endl;
 
         CellDataElement.push_back(CellData(data.m_StartTime.toString("hh:mm:ss"), "1698", false));
-        CellDataElement.push_back(CellData(data.m_Character->m_Name, "1755", false));
+        CellDataElement.push_back(CellData(data.m_Character->m_Name, "1755", data.m_Character->m_Gender == Gender::female));
         CellDataElement.push_back(CellData(data.m_Line, "6897", false));
 
         InsertRow(xmlWriter, CellDataElement);
@@ -103,6 +104,11 @@ void CDocController::ConvertSubDataToDoc(const QString& FileName, const std::vec
     EndAllElements(xmlWriter);
     xmlWriter.writeEndDocument();
     file.close();   // Закрываем файл
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Выгрузка в doc");
+    msgBox.setText("Выгрузка в doc завершена");
+    msgBox.exec();
 }
 
 void CDocController::StartElement(QXmlStreamWriter& XMLWriter, const QString& Element)

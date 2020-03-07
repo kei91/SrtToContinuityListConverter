@@ -6,8 +6,8 @@
 class Utils
 {
 public:
-    static const QString GetFileName();
-    static const QString GetSaveFileName();
+    static const QString GetFileName(const QString& Path);
+    static const QString GetSaveFileName(const QString& Path);
 };
 
 #endif // UTILS_H

@@ -25,7 +25,7 @@ public:
 
 public:
     QString m_Name;
-    Gender  m_Gender;
+    mutable Gender  m_Gender;
 };
 
 #endif // CHARACTERDATA_H
