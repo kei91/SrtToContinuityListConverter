@@ -15,7 +15,7 @@ public:
     const std::vector<CSubData>& GetSubData() const;
 
 public slots:
-    void ExtractDataFromFile(const QString& Filename);
+    void ExtractDataFromFile(const QString& Filename, bool pauseEnabled);
 
 private:
     std::vector<CSubData> m_Sub;

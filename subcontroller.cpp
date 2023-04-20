@@ -5,9 +5,11 @@
 #include <QStringList>
 #include <QTextStream>
 #include <QTime>
+#include <QRegularExpression>
 
 #define START_TIME_POSITION       0
-#define AMOUNT_OF_DIGITS_FOR_TIME 8
+#define END_TIME_POSITION         17
+#define AMOUNT_OF_DIGITS_FOR_TIME 12
 
 void CSubController::SetMainWindow(MainWindow* MainWindow)
 {
@@ -19,31 +21,36 @@ const std::vector<CSubData>& CSubController::GetSubData() const
     return m_Sub;
 }
 
-void CSubController::ExtractDataFromFile(const QString& Filename)
+void CSubController::ExtractDataFromFile(const QString& Filename, bool pauseEnabled)
 {
-    QRegExp reLineNumber("\\d*");
+    QRegularExpression reLineNumber("\\d*");
     QString prevLine("");
     QFile inputFile(Filename);
 
+    QTime prevTime;
+    QString lastCharacteName("");
+    bool addToSameCharacter = false;
     if (inputFile.open(QIODevice::ReadOnly))
     {
        QTextStream in(&inputFile);
        while (!in.atEnd())
        {
           QString line = in.readLine();
-
-          if (reLineNumber.exactMatch(line) && prevLine == "")
+          QRegularExpressionMatch reMatch = reLineNumber.match(line);
+          if (reMatch.hasMatch() && prevLine == "")
           {
               quint32 lineNumber = line.toUInt();
-              qDebug() << "lineNumber" << lineNumber << endl;
+              qDebug() << "lineNumber" << lineNumber << Qt::endl;
 
               if (in.atEnd())
                   break;
 
               line = in.readLine();
-              QTime startTime = QTime::fromString(line.mid(START_TIME_POSITION, AMOUNT_OF_DIGITS_FOR_TIME), "hh:mm:ss");
+              QTime startTime = QTime::fromString(line.mid(START_TIME_POSITION, AMOUNT_OF_DIGITS_FOR_TIME), "hh:mm:ss,zzz");
+              QTime endTime = QTime::fromString(line.mid(END_TIME_POSITION, AMOUNT_OF_DIGITS_FOR_TIME), "hh:mm:ss,zzz");
 
-              qDebug() << "time" << startTime.hour() << " " << startTime.minute() << " " << startTime.second() << endl;
+              qDebug() << "time" << startTime.toString() << Qt::endl;
+              qDebug() << "prevTime" << prevTime.toString() << Qt::endl;
 
               while (!in.atEnd())
               {
@@ -58,10 +65,36 @@ void CSubController::ExtractDataFromFile(const QString& Filename)
                     QString name = line.mid(1, indexEndName - 1);
                     QString text = line.mid(indexEndName + 1, line.size()).simplified();
 
-                    qDebug() << "name" << name << endl;
-                    qDebug() << "text" << text << endl;
+                    qDebug() << "name" << name << Qt::endl;
+                    qDebug() << "text" << text << Qt::endl;
 
-                    m_Sub.push_back(CSubData(lineNumber, startTime, m_MainWindow->GetCharacter(name), text));
+                    addToSameCharacter = false;
+                    if (pauseEnabled && lastCharacteName == name) {
+                        int vecSize = m_Sub.size();
+                        if (vecSize > 0) {
+                            qint64 timeDiff = prevTime.msecsTo(startTime);
+                            QString splitStr("");
+                            if (timeDiff >= 850 && timeDiff <= 3000) {
+                                splitStr = "/";
+                            }
+                            else if (timeDiff > 3000 && timeDiff <= 5000) {
+                                splitStr = "// ";
+                            }
+                            else if (timeDiff > 5000) {
+                                splitStr = "//" + (startTime.hour() == 0 ? startTime.toString("mm:ss") : startTime.toString("hh:mm:ss"));
+                            }
+
+                            addToSameCharacter = true;
+                            m_Sub[vecSize - 1].m_Line += splitStr + " " + text;
+                        }
+                    }
+
+                    if (!addToSameCharacter) {
+                        m_Sub.push_back(CSubData(lineNumber, startTime, m_MainWindow->GetCharacter(name), text));
+                    }
+
+                    lastCharacteName = name;
+                    prevTime = endTime;
                   }
               }
           }

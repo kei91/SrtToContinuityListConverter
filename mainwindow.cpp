@@ -42,9 +42,9 @@ void MainWindow::UpdateTable()
     header->setSectionResizeMode(QHeaderView::Stretch);
 
     quint8 row = 0;
-    for(auto character : m_Characters)
+    for(auto& character : m_Characters)
     {
-        qDebug() << "character.m_Name " << character.m_Name << endl;
+        qDebug() << "character.m_Name " << character.m_Name << Qt::endl;
 
         ui->NamesTable->insertRow(row);
         ui->NamesTable->setItem(row, 0, new QTableWidgetItem(QString::number(row)));
@@ -62,19 +62,19 @@ void MainWindow::OnBrowseClicked()
 {
     const QString fileName = Utils::GetFileName(ui->BrowseLine->text());
 
-    if (!fileName.count())
+    if (!fileName.size())
         return;
 
     ui->BrowseLine->setText(fileName);
 
-    emit OnFileNameReceived(fileName);
+    emit OnFileNameReceived(fileName, ui->EnablePause->isChecked());
 }
 
 void MainWindow::OnExportToDocClicked()
 {
     QString fileName = Utils::GetSaveFileName(ui->ExportToDocLine->text());
 
-    if (!fileName.count())
+    if (!fileName.size())
         return;
 
     ui->ExportToDocLine->setText(fileName);

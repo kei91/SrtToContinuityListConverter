@@ -86,10 +86,10 @@ void CDocController::ConvertSubDataToDoc(const QString& FileName, const QString&
     {
         std::vector<CellData> CellDataElement;
 
-        qDebug() << "SubData in doc" << endl;
-        qDebug() << "time" << data.m_StartTime.toString("hh::mm::ss") << endl;
-        qDebug() << "name" << data.m_Character->m_Name << endl;
-        qDebug() << "line" << data.m_Line << endl;
+        qDebug() << "SubData in doc" << Qt::endl;
+        qDebug() << "time" << data.m_StartTime.toString("hh::mm::ss") << Qt::endl;
+        qDebug() << "name" << data.m_Character->m_Name << Qt::endl;
+        qDebug() << "line" << data.m_Line << Qt::endl;
 
         CellDataElement.push_back(CellData(data.m_StartTime.toString("hh:mm:ss"), "1698", false));
         CellDataElement.push_back(CellData(data.m_Character->m_Name, "1755", data.m_Character->m_Gender == Gender::female));

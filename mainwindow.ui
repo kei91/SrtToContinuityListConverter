@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>551</width>
-    <height>471</height>
+    <height>494</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>450</x>
-      <y>390</y>
+      <y>420</y>
       <width>93</width>
       <height>28</height>
      </rect>
@@ -54,7 +54,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>390</y>
+      <y>420</y>
       <width>431</width>
       <height>28</height>
      </rect>
@@ -93,6 +93,22 @@
      </rect>
     </property>
    </widget>
+   <widget class="QCheckBox" name="EnablePause">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>390</y>
+      <width>171</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Использовать знаки пауз</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -100,7 +116,7 @@
      <x>0</x>
      <y>0</y>
      <width>551</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
