@@ -1,22 +1,22 @@
 #include "utils.h"
 #include <QFileDialog>
 
-const QString Utils::GetFileName(const QString& Path)
+const QString Utils::GetFileName(const QString& path)
 {
     return QFileDialog::getOpenFileName(
                                 nullptr,
                                 QFileDialog::tr("Open File"),
-                                Path.isEmpty() ? QDir::currentPath() : Path,
+                                path.isEmpty() ? QDir::currentPath() : path,
                                 QFileDialog::tr("Subtitles (*.srt)")
                             );
 }
 
-const QString Utils::GetSaveFileName(const QString& Path)
+const QString Utils::GetSaveFileName(const QString& path)
 {
     return QFileDialog::getSaveFileName(
                                 nullptr,
                                 QFileDialog::tr("Save File"),
-                                Path.isEmpty() ? QDir::currentPath() : Path,
+                                path.isEmpty() ? QDir::currentPath() : path,
                                 QFileDialog::tr("Doc (*.doc)")
                             );
 }

@@ -11,15 +11,15 @@ class MainWindow;
 class CSubController: public QObject
 {
 public:
-    void SetMainWindow(MainWindow* MainWindow);
+    void SetMainWindow(MainWindow* mainWindow);
     const std::vector<CSubData>& GetSubData() const;
 
 public slots:
-    void ExtractDataFromFile(const QString& Filename, bool pauseEnabled);
+    void ExtractDataFromFile(const QString& filename, bool pauseEnabled);
 
 private:
-    std::vector<CSubData> m_Sub;
-    MainWindow*           m_MainWindow;
+    std::vector<CSubData> _subData;
+    MainWindow*           _mainWindow;
 };
 
 #endif // SUBCONTROLLER_H

@@ -13,8 +13,8 @@ enum class Gender
 class CCharacterData
 {
 public:
-    explicit CCharacterData(QString &Name);
-    explicit CCharacterData(QString &Name, Gender gender);
+    explicit CCharacterData(QString &name);
+    explicit CCharacterData(QString &name, Gender gender);
 
     void SetGender(Gender gender);
 
@@ -24,8 +24,8 @@ public:
     CCharacterData& operator=(const CCharacterData& characterData);
 
 public:
-    QString m_Name;
-    mutable Gender  m_Gender;
+    QString _name;
+    mutable Gender  _gender;
 };
 
 #endif // CHARACTERDATA_H

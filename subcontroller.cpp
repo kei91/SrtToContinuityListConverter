@@ -11,21 +11,21 @@
 #define END_TIME_POSITION         17
 #define AMOUNT_OF_DIGITS_FOR_TIME 12
 
-void CSubController::SetMainWindow(MainWindow* MainWindow)
+void CSubController::SetMainWindow(MainWindow* mainWindow)
 {
-    m_MainWindow = MainWindow;
+    _mainWindow = mainWindow;
 }
 
 const std::vector<CSubData>& CSubController::GetSubData() const
 {
-    return m_Sub;
+    return _subData;
 }
 
-void CSubController::ExtractDataFromFile(const QString& Filename, bool pauseEnabled)
+void CSubController::ExtractDataFromFile(const QString& filename, bool pauseEnabled)
 {
     QRegularExpression reLineNumber("\\d*");
     QString prevLine("");
-    QFile inputFile(Filename);
+    QFile inputFile(filename);
 
     QTime prevTime;
     QString lastCharacteName("");
@@ -70,7 +70,7 @@ void CSubController::ExtractDataFromFile(const QString& Filename, bool pauseEnab
 
                     addToSameCharacter = false;
                     if (pauseEnabled && lastCharacteName == name) {
-                        int vecSize = m_Sub.size();
+                        int vecSize = _subData.size();
                         if (vecSize > 0) {
                             qint64 timeDiff = prevTime.msecsTo(startTime);
                             QString splitStr("");
@@ -85,12 +85,12 @@ void CSubController::ExtractDataFromFile(const QString& Filename, bool pauseEnab
                             }
 
                             addToSameCharacter = true;
-                            m_Sub[vecSize - 1].m_Line += splitStr + " " + text;
+                            _subData[vecSize - 1]._line += splitStr + " " + text;
                         }
                     }
 
                     if (!addToSameCharacter) {
-                        m_Sub.push_back(CSubData(lineNumber, startTime, m_MainWindow->GetCharacter(name), text));
+                        _subData.push_back(CSubData(lineNumber, startTime, _mainWindow->GetCharacter(name), text));
                     }
 
                     lastCharacteName = name;
@@ -105,5 +105,5 @@ void CSubController::ExtractDataFromFile(const QString& Filename, bool pauseEnab
        inputFile.close();
     }
 
-    m_MainWindow->UpdateTable();
+    _mainWindow->UpdateTable();
 }

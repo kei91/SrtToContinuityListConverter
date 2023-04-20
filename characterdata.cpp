@@ -1,47 +1,47 @@
 #include "characterdata.h"
 
-CCharacterData::CCharacterData(QString &Name) :
-    m_Name(Name),
-    m_Gender(Gender::female)
+CCharacterData::CCharacterData(QString &name) :
+    _name(name),
+    _gender(Gender::female)
 {
 
 }
 
-CCharacterData::CCharacterData(QString &Name, Gender gender) :
-    m_Name(Name),
-    m_Gender(gender)
+CCharacterData::CCharacterData(QString &name, Gender gender) :
+    _name(name),
+    _gender(gender)
 {
 
 }
 
 void CCharacterData::SetGender(Gender gender)
 {
-    m_Gender = gender;
+    _gender = gender;
 }
 
 bool CCharacterData::operator<(const CCharacterData& compare) const
 {
-    return this->m_Name < compare.m_Name;
+    return this->_name < compare._name;
 }
 
 bool CCharacterData::operator==(const CCharacterData& compare)
 {
-    return (this->m_Name == compare.m_Name &&
-            this->m_Gender == compare.m_Gender);
+    return (this->_name == compare._name &&
+            this->_gender == compare._gender);
 }
 
 bool CCharacterData::operator!=(const CCharacterData& compare)
 {
-    return (this->m_Name != compare.m_Name ||
-            this->m_Gender != compare.m_Gender);
+    return (this->_name != compare._name ||
+            this->_gender != compare._gender);
 }
 
 CCharacterData& CCharacterData::operator=(const CCharacterData& characterData)
 {
     if (this != &characterData)
     {
-        this->m_Name = characterData.m_Name;
-        this->m_Gender = characterData.m_Gender;
+        this->_name = characterData._name;
+        this->_gender = characterData._gender;
     }
 
     return *this;

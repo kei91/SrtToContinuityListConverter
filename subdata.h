@@ -12,10 +12,10 @@ public:
     CSubData(quint32 number, QTime startTime, CCharacterData* character, QString line);
 
 public:
-    quint32         m_Number;
-    QTime           m_StartTime;
-    CCharacterData* m_Character;
-    QString         m_Line;
+    quint32         _number;
+    QTime           _startTime;
+    CCharacterData* _character;
+    QString         _line;
 };
 
 #endif // SUBDATA_H

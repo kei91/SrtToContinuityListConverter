@@ -9,11 +9,11 @@ class QXmlStreamWriter;
 
 struct CellData
 {
-    QString m_Line;
-    QString m_Size;
-    bool    m_IsBold;
+    QString _line;
+    QString _size;
+    bool    _isBold;
 
-    CellData(QString Line, QString Size, bool IsBold) : m_Line(Line), m_Size(Size), m_IsBold(IsBold) {};
+    CellData(QString line, QString size, bool isBold) : _line(line), _size(size), _isBold(isBold) {};
 };
 
 // Will handle convertation to .doc formate
@@ -27,14 +27,14 @@ private:
     void EndElement(QXmlStreamWriter& XMLWriter);
     void EndAllElements(QXmlStreamWriter& XMLWriter);
 
-    void InsertRow(QXmlStreamWriter& XMLWriter, const std::vector<CellData>& CellDataElements);
-    void InsertColumn(QXmlStreamWriter& XMLWriter, const CellData& CellDataElement);
+    void InsertRow(QXmlStreamWriter& XMLWriter, const std::vector<CellData>& cellDataElements);
+    void InsertColumn(QXmlStreamWriter& XMLWriter, const CellData& cellDataElement);
 
 public slots:
-    void ConvertSubDataToDoc(const QString& FileName, const QString& StrTitle, const std::vector<CSubData>& SubData);
+    void ConvertSubDataToDoc(const QString& fileName, const QString& strTitle, const std::vector<CSubData>& subData);
 
 private:
-    MainWindow* m_MainWindow;
+    MainWindow* _mainWindow;
     quint32     m_OpenElements = 0;
 };
 

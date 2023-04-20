@@ -11,12 +11,12 @@
 
 void CDocController::SetMainWindow(MainWindow* MainWindow)
 {
-    m_MainWindow = MainWindow;
+    _mainWindow = MainWindow;
 }
 
-void CDocController::ConvertSubDataToDoc(const QString& FileName, const QString& StrTitle, const std::vector<CSubData>& SubData)
+void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString& strTitle, const std::vector<CSubData>& subData)
 {
-    QFile file(FileName);
+    QFile file(fileName);
     file.open(QIODevice::WriteOnly);
 
     QXmlStreamWriter xmlWriter(&file);
@@ -31,7 +31,7 @@ void CDocController::ConvertSubDataToDoc(const QString& FileName, const QString&
     xmlWriter.writeAttribute("xmlns:fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
     StartElement(xmlWriter, "w:r");
     StartElement(xmlWriter, "w:t");
-    xmlWriter.writeCharacters(StrTitle);
+    xmlWriter.writeCharacters(strTitle);
     EndElement(xmlWriter);
     EndElement(xmlWriter);
     EndElement(xmlWriter);
@@ -82,18 +82,18 @@ void CDocController::ConvertSubDataToDoc(const QString& FileName, const QString&
 
     InsertRow(xmlWriter, CellDatasHeadLine);
 
-    for (const CSubData& data : SubData)
+    for (const CSubData& data : subData)
     {
         std::vector<CellData> CellDataElement;
 
         qDebug() << "SubData in doc" << Qt::endl;
-        qDebug() << "time" << data.m_StartTime.toString("hh::mm::ss") << Qt::endl;
-        qDebug() << "name" << data.m_Character->m_Name << Qt::endl;
-        qDebug() << "line" << data.m_Line << Qt::endl;
+        qDebug() << "time" << data._startTime.toString("hh::mm::ss") << Qt::endl;
+        qDebug() << "name" << data._character->_name << Qt::endl;
+        qDebug() << "line" << data._line << Qt::endl;
 
-        CellDataElement.push_back(CellData(data.m_StartTime.toString("hh:mm:ss"), "1698", false));
-        CellDataElement.push_back(CellData(data.m_Character->m_Name, "1755", data.m_Character->m_Gender == Gender::female));
-        CellDataElement.push_back(CellData(data.m_Line, "6897", false));
+        CellDataElement.push_back(CellData(data._startTime.toString("hh:mm:ss"), "1698", false));
+        CellDataElement.push_back(CellData(data._character->_name, "1755", data._character->_gender == Gender::female));
+        CellDataElement.push_back(CellData(data._line, "6897", false));
 
         InsertRow(xmlWriter, CellDataElement);
     }
@@ -131,26 +131,26 @@ void CDocController::EndAllElements(QXmlStreamWriter& XMLWriter)
     }
 }
 
-void CDocController::InsertRow(QXmlStreamWriter& XMLWriter, const std::vector<CellData>& CellDataElements)
+void CDocController::InsertRow(QXmlStreamWriter& XMLWriter, const std::vector<CellData>& cellDataElements)
 {
     StartElement(XMLWriter, "w:tr");
 
     StartElement(XMLWriter, "w:trPr");
     EndElement(XMLWriter);
 
-    for (const CellData& CellDataElement : CellDataElements)
+    for (const CellData& CellDataElement : cellDataElements)
         InsertColumn(XMLWriter, CellDataElement);
 
     EndElement(XMLWriter); // w:tr
 }
 
-void CDocController::InsertColumn(QXmlStreamWriter& XMLWriter, const CellData& CellDataElement)
+void CDocController::InsertColumn(QXmlStreamWriter& XMLWriter, const CellData& cellDataElement)
 {
     StartElement(XMLWriter, "w:tc");
     StartElement(XMLWriter, "w:tcPr");
     StartElement(XMLWriter, "w:tcW");
     XMLWriter.writeAttribute("w:type", "dxa");
-    XMLWriter.writeAttribute("w:w", CellDataElement.m_Size);
+    XMLWriter.writeAttribute("w:w", cellDataElement._size);
     EndElement(XMLWriter); // w:tcW
     StartElement(XMLWriter, "w:tcBorders");
 
@@ -175,7 +175,7 @@ void CDocController::InsertColumn(QXmlStreamWriter& XMLWriter, const CellData& C
     EndElement(XMLWriter); // w:pPr
     StartElement(XMLWriter, "w:r");
 
-    if (CellDataElement.m_IsBold)
+    if (cellDataElement._isBold)
     {
         StartElement(XMLWriter, "w:rPr");
         StartElement(XMLWriter, "w:b");
@@ -184,7 +184,7 @@ void CDocController::InsertColumn(QXmlStreamWriter& XMLWriter, const CellData& C
     }
 
     StartElement(XMLWriter, "w:t");
-    XMLWriter.writeCharacters(CellDataElement.m_Line);
+    XMLWriter.writeCharacters(cellDataElement._line);
     EndElement(XMLWriter); // w:t
     EndElement(XMLWriter); // w:r
     EndElement(XMLWriter); // w:p

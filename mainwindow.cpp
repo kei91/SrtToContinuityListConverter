@@ -10,23 +10,23 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    m_SubController.SetMainWindow(this);
-    m_DocController.SetMainWindow(this);
+    _subDataController.SetMainWindow(this);
+    _docController.SetMainWindow(this);
 
-    connect(this, &MainWindow::OnFileNameReceived, &m_SubController, &CSubController::ExtractDataFromFile);
-    connect(this, &MainWindow::OnExportRequired, &m_DocController, &CDocController::ConvertSubDataToDoc);
+    connect(this, &MainWindow::OnFileNameReceived, &_subDataController, &CSubController::ExtractDataFromFile);
+    connect(this, &MainWindow::OnExportRequired, &_docController, &CDocController::ConvertSubDataToDoc);
 }
 
 MainWindow::~MainWindow()
 {
-    disconnect(this, &MainWindow::OnFileNameReceived, &m_SubController, &CSubController::ExtractDataFromFile);
-    disconnect(this, &MainWindow::OnExportRequired, &m_DocController, &CDocController::ConvertSubDataToDoc);
+    disconnect(this, &MainWindow::OnFileNameReceived, &_subDataController, &CSubController::ExtractDataFromFile);
+    disconnect(this, &MainWindow::OnExportRequired, &_docController, &CDocController::ConvertSubDataToDoc);
     delete ui;
 }
 
 CCharacterData *MainWindow::GetCharacter(QString name)
 {
-    std::pair<std::set<CCharacterData>::iterator, bool> result = m_Characters.insert(CCharacterData(name));
+    std::pair<std::set<CCharacterData>::iterator, bool> result = _characters.insert(CCharacterData(name));
 
     return const_cast<CCharacterData *>(&(*result.first));
 }
@@ -42,14 +42,14 @@ void MainWindow::UpdateTable()
     header->setSectionResizeMode(QHeaderView::Stretch);
 
     quint8 row = 0;
-    for(auto& character : m_Characters)
+    for(auto& character : _characters)
     {
-        qDebug() << "character.m_Name " << character.m_Name << Qt::endl;
+        qDebug() << "character._name " << character._name << Qt::endl;
 
         ui->NamesTable->insertRow(row);
         ui->NamesTable->setItem(row, 0, new QTableWidgetItem(QString::number(row)));
-        ui->NamesTable->setItem(row, 1, new QTableWidgetItem(character.m_Name));
-        ui->NamesTable->setItem(row, 2, new QTableWidgetItem(character.m_Gender == Gender::male ? "m" : "f"));
+        ui->NamesTable->setItem(row, 1, new QTableWidgetItem(character._name));
+        ui->NamesTable->setItem(row, 2, new QTableWidgetItem(character._gender == Gender::male ? "m" : "f"));
 
         ++row;
     }
@@ -79,7 +79,7 @@ void MainWindow::OnExportToDocClicked()
 
     ui->ExportToDocLine->setText(fileName);
 
-    emit OnExportRequired(fileName, ui->DocNameLine->text(), m_SubController.GetSubData());
+    emit OnExportRequired(fileName, ui->DocNameLine->text(), _subDataController.GetSubData());
 }
 
 void MainWindow::OnNamesTableCellClicked(int row, int column)
@@ -87,9 +87,9 @@ void MainWindow::OnNamesTableCellClicked(int row, int column)
     if (column != 2)
         return;
 
-    std::set<CCharacterData>::iterator it = m_Characters.begin();
+    std::set<CCharacterData>::iterator it = _characters.begin();
     std::advance(it, row);
 
-    it->m_Gender = (*it).m_Gender == Gender::male ? Gender::female : Gender::male;
-    ui->NamesTable->setItem(row, 2, new QTableWidgetItem(it->m_Gender == Gender::male ? "m" : "f"));
+    it->_gender = (*it)._gender == Gender::male ? Gender::female : Gender::male;
+    ui->NamesTable->setItem(row, 2, new QTableWidgetItem(it->_gender == Gender::male ? "m" : "f"));
 }

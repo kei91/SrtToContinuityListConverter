@@ -26,7 +26,7 @@ public:
 
 signals:
     void OnFileNameReceived(const QString&, bool);
-    void OnExportRequired(const QString&, const QString&, const std::vector<CSubData>& SubData);
+    void OnExportRequired(const QString&, const QString&, const std::vector<CSubData>& subData);
 
 private slots:
     void OnBrowseClicked();
@@ -36,9 +36,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    std::set<CCharacterData> m_Characters;
-    CSubController           m_SubController;
-    CDocController           m_DocController;
+    std::set<CCharacterData> _characters;
+    CSubController           _subDataController;
+    CDocController           _docController;
 
 };
 #endif // MAINWINDOW_H
