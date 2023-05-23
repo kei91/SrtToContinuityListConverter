@@ -14,7 +14,7 @@ void CDocController::SetMainWindow(MainWindow* MainWindow)
 
 // Example of doc file
 // https://sebsauvage.net/wiki/doku.php?id=word_document_generation
-void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString& strTitle, const std::vector<CSubData>& subData)
+void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString& strTitle, const std::vector<CSubData>& subData, FemaleLinesStyle style)
 {
     pugi::xml_document doc;
     pugi::xml_node htmlNode = doc.append_child("html");
@@ -44,13 +44,20 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
         tdTimestampNode.append_child(pugi::node_pcdata).set_value(data._startTime.toString("hh:mm:ss").toStdString().c_str());
 
         pugi::xml_node tdNameNode = trFillingNode.append_child("td");
+        pugi::xml_node parentNode = tdNameNode;
         if (data._character->_gender == Gender::female) {
-            pugi::xml_node boldNode = tdNameNode.append_child("b");
-            boldNode.append_child(pugi::node_pcdata).set_value(data._character->_name.toStdString().c_str());
+            if (style.isBold) {
+                parentNode = parentNode.append_child("b");
+            }
+            if (style.isUnderline) {
+                parentNode = parentNode.append_child("u");
+            }
+            if (style.isItalic) {
+                parentNode = parentNode.append_child("i");
+            }
         }
-        else {
-            tdNameNode.append_child(pugi::node_pcdata).set_value(data._character->_name.toStdString().c_str());
-        }
+
+        parentNode.append_child(pugi::node_pcdata).set_value(data._character->_name.toStdString().c_str());
 
         pugi::xml_node tdLineNode = trFillingNode.append_child("td");
         tdLineNode.append_child(pugi::node_pcdata).set_value(data._line.toStdString().c_str());

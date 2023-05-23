@@ -85,7 +85,12 @@ void MainWindow::OnExportToDocClicked()
 
     ui->ExportToDocLine->setText(fileName);
 
-    emit OnExportRequired(fileName, ui->DocNameLine->text(), _subDataController.GetSubData());
+    FemaleLinesStyle style(
+                ui->FemaleLineBold->isChecked(),
+                ui->FemaleLineUnderLine->isChecked(),
+                ui->FemaleLineItalic->isChecked());
+
+    emit OnExportRequired(fileName, ui->DocNameLine->text(), _subDataController.GetSubData(), style);
 }
 
 void MainWindow::OnNamesTableCellClicked(int row, int column)

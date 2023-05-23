@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>554</width>
-    <height>567</height>
+    <width>553</width>
+    <height>576</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>450</x>
-      <y>490</y>
+      <y>501</y>
       <width>93</width>
       <height>28</height>
      </rect>
@@ -54,7 +54,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>490</y>
+      <y>501</y>
       <width>431</width>
       <height>28</height>
      </rect>
@@ -97,7 +97,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>390</y>
+      <y>410</y>
       <width>171</width>
       <height>20</height>
      </rect>
@@ -113,7 +113,7 @@
     <property name="geometry">
      <rect>
       <x>131</x>
-      <y>414</y>
+      <y>434</y>
       <width>41</width>
       <height>22</height>
      </rect>
@@ -126,7 +126,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>420</y>
+      <y>440</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -139,7 +139,7 @@
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>420</y>
+      <y>440</y>
       <width>21</width>
       <height>16</height>
      </rect>
@@ -151,8 +151,8 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>420</y>
+      <x>247</x>
+      <y>440</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -165,7 +165,7 @@
     <property name="geometry">
      <rect>
       <x>202</x>
-      <y>414</y>
+      <y>434</y>
       <width>40</width>
       <height>22</height>
      </rect>
@@ -178,7 +178,7 @@
     <property name="geometry">
      <rect>
       <x>19</x>
-      <y>446</y>
+      <y>466</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -191,7 +191,7 @@
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>440</y>
+      <y>460</y>
       <width>41</width>
       <height>22</height>
      </rect>
@@ -204,7 +204,7 @@
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>445</y>
+      <y>465</y>
       <width>31</width>
       <height>16</height>
      </rect>
@@ -213,13 +213,81 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;мс&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>383</y>
+      <width>261</width>
+      <height>110</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Настройка пауз</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>383</y>
+      <width>261</width>
+      <height>110</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Выделение женских реплик</string>
+    </property>
+    <widget class="QCheckBox" name="FemaleLineBold">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>26</y>
+       <width>141</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Выделять жирным</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="FemaleLineUnderLine">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>48</y>
+       <width>161</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Выделять подчеркнутым</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="FemaleLineItalic">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>161</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Выделять курсивным</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>554</width>
+     <width>553</width>
      <height>22</height>
     </rect>
    </property>
