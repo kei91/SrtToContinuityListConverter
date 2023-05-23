@@ -25,7 +25,7 @@ public:
     void UpdateTable();
 
 signals:
-    void OnFileNameReceived(const QString&, bool);
+    void OnFileNameReceived(const QString&, SubPauseInfo);
     void OnExportRequired(const QString&, const QString&, const std::vector<CSubData>& subData);
 
 private slots:

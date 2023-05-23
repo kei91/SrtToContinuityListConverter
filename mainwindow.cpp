@@ -67,7 +67,13 @@ void MainWindow::OnBrowseClicked()
 
     ui->BrowseLine->setText(fileName);
 
-    emit OnFileNameReceived(fileName, ui->EnablePause->isChecked());
+    SubPauseInfo info(
+                ui->EnablePause->isChecked(),
+                ui->SmallPauseStart->text().toInt(),
+                ui->SmallPauseEnd->text().toInt(),
+                ui->BigPauseStart->text().toInt());
+
+    emit OnFileNameReceived(fileName, info);
 }
 
 void MainWindow::OnExportToDocClicked()

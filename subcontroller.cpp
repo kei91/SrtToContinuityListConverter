@@ -21,7 +21,7 @@ const std::vector<CSubData>& CSubController::GetSubData() const
     return _subData;
 }
 
-void CSubController::ExtractDataFromFile(const QString& filename, bool pauseEnabled)
+void CSubController::ExtractDataFromFile(const QString& filename, SubPauseInfo pauseInfo)
 {
     QRegularExpression reLineNumber("\\d*");
     QString prevLine("");
@@ -69,18 +69,18 @@ void CSubController::ExtractDataFromFile(const QString& filename, bool pauseEnab
                     qDebug() << "text" << text << Qt::endl;
 
                     addToSameCharacter = false;
-                    if (pauseEnabled && lastCharacteName == name) {
+                    if (pauseInfo.pauseEnabled && lastCharacteName == name) {
                         int vecSize = _subData.size();
                         if (vecSize > 0) {
                             qint64 timeDiff = prevTime.msecsTo(startTime);
                             QString splitStr("");
-                            if (timeDiff >= 850 && timeDiff <= 3000) {
+                            if (timeDiff >= pauseInfo.smallPauseStart && timeDiff <= pauseInfo.smallPauseEnd) {
                                 splitStr = "/";
                             }
-                            else if (timeDiff > 3000 && timeDiff <= 5000) {
+                            else if (timeDiff > pauseInfo.smallPauseEnd && timeDiff <= pauseInfo.bigPauseStart) {
                                 splitStr = "// ";
                             }
-                            else if (timeDiff > 5000) {
+                            else if (timeDiff > pauseInfo.bigPauseStart) {
                                 splitStr = "//" + (startTime.hour() == 0 ? startTime.toString("mm:ss") : startTime.toString("hh:mm:ss"));
                             }
 
