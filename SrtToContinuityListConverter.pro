@@ -20,6 +20,7 @@ SOURCES += \
     doccontroller.cpp \
     main.cpp \
     mainwindow.cpp \
+    pugixml/pugixml.cpp \
     subcontroller.cpp \
     subdata.cpp \
     utils.cpp
@@ -28,6 +29,8 @@ HEADERS += \
     characterdata.h \
     doccontroller.h \
     mainwindow.h \
+    pugixml/pugiconfig.hpp \
+    pugixml/pugixml.hpp \
     subcontroller.h \
     subdata.h \
     utils.h

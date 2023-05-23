@@ -22,14 +22,6 @@ class CDocController: public QObject
 public:
     void SetMainWindow(MainWindow* MainWindow);
 
-private:
-    void StartElement(QXmlStreamWriter& XMLWriter, const QString& Element);
-    void EndElement(QXmlStreamWriter& XMLWriter);
-    void EndAllElements(QXmlStreamWriter& XMLWriter);
-
-    void InsertRow(QXmlStreamWriter& XMLWriter, const std::vector<CellData>& cellDataElements);
-    void InsertColumn(QXmlStreamWriter& XMLWriter, const CellData& cellDataElement);
-
 public slots:
     void ConvertSubDataToDoc(const QString& fileName, const QString& strTitle, const std::vector<CSubData>& subData);
 
