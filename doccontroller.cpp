@@ -23,7 +23,8 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
     htmlNode.append_attribute("xmlns") = "http://www.w3.org/TR/REC-html40";
     pugi::xml_node headNode = htmlNode.append_child("head");
     pugi::xml_node styleNode = headNode.append_child("style");
-    styleNode.append_child(pugi::node_pcdata).set_value("body { font-family: Times New Roman;  font-size: 14pt;  line-height: 1.5; }");
+    styleNode.append_child(pugi::node_pcdata).set_value("body { font-family: Times New Roman;  font-size: 14pt;  line-height: 1.5; } \
+                                                         table, tr, td { border: 1px solid black; border-collapse: collapse; ");
 
     pugi::xml_node bodyNode = htmlNode.append_child("body");
     pugi::xml_node titleNode = bodyNode.append_child("p");
@@ -106,7 +107,7 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
         }
     }
 
-    doc.save_file(fileName.toStdString().c_str(), "\t", pugi::format_raw);
+    doc.save_file(fileName.toStdString().c_str(), "\t", pugi::format_raw | pugi::format_no_declaration);
 
     QMessageBox msgBox;
     msgBox.setWindowTitle("Выгрузка в doc");
