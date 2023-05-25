@@ -21,11 +21,18 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
     htmlNode.append_attribute("xmlns:o") = "urn:schemas-microsoft-com:office:office";
     htmlNode.append_attribute("xmlns:w") = "urn:schemas-microsoft-com:office:word";
     htmlNode.append_attribute("xmlns") = "http://www.w3.org/TR/REC-html40";
-    htmlNode.append_child("head");
+    pugi::xml_node headNode = htmlNode.append_child("head");
+    pugi::xml_node styleNode = headNode.append_child("style");
+    styleNode.append_child(pugi::node_pcdata).set_value("body { \
+                                                        font-family: Times New Roman; \
+                                                        font-size: 14pt; \
+                                                        line-height: 1.5; }");
 
     pugi::xml_node bodyNode = htmlNode.append_child("body");
-    pugi::xml_node  titleNode = bodyNode.append_child("h3");
-    titleNode.append_child(pugi::node_pcdata).set_value(strTitle.toStdString().c_str());
+    pugi::xml_node titleNode = bodyNode.append_child("p");
+    titleNode.append_attribute("align") = "right";
+    pugi::xml_node boldTitleNode = titleNode.append_child("b");
+    boldTitleNode.append_child(pugi::node_pcdata).set_value(strTitle.toStdString().c_str());
 
     pugi::xml_node tableNode = bodyNode.append_child("table");
     tableNode.append_attribute("width") = "100%";
