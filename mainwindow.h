@@ -26,7 +26,7 @@ public:
 
 signals:
     void OnFileNameReceived(const QString&, SubPauseInfo);
-    void OnExportRequired(const QString&, const QString&, const std::vector<CSubData>& subData, FemaleLinesStyle style);
+    void OnExportRequired(const QString&, const QString&, const std::vector<CSubData>& subData, FemaleLinesStyle style, bool useUnderline);
 
 private slots:
     void OnBrowseClicked();

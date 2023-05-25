@@ -35,7 +35,7 @@ public:
     void SetMainWindow(MainWindow* MainWindow);
 
 public slots:
-    void ConvertSubDataToDoc(const QString& fileName, const QString& strTitle, const std::vector<CSubData>& subData, FemaleLinesStyle style);
+    void ConvertSubDataToDoc(const QString& fileName, const QString& strTitle, const std::vector<CSubData>& subData, FemaleLinesStyle style, bool useUnderline);
 
 private:
     MainWindow* _mainWindow;

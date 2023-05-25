@@ -14,7 +14,7 @@ void CDocController::SetMainWindow(MainWindow* MainWindow)
 
 // Example of doc file
 // https://sebsauvage.net/wiki/doku.php?id=word_document_generation
-void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString& strTitle, const std::vector<CSubData>& subData, FemaleLinesStyle style)
+void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString& strTitle, const std::vector<CSubData>& subData, FemaleLinesStyle style, bool useUnderline)
 {
     pugi::xml_document doc;
     pugi::xml_node htmlNode = doc.append_child("html");
@@ -23,10 +23,7 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
     htmlNode.append_attribute("xmlns") = "http://www.w3.org/TR/REC-html40";
     pugi::xml_node headNode = htmlNode.append_child("head");
     pugi::xml_node styleNode = headNode.append_child("style");
-    styleNode.append_child(pugi::node_pcdata).set_value("body { \
-                                                        font-family: Times New Roman; \
-                                                        font-size: 14pt; \
-                                                        line-height: 1.5; }");
+    styleNode.append_child(pugi::node_pcdata).set_value("body { font-family: Times New Roman;  font-size: 14pt;  line-height: 1.5; }");
 
     pugi::xml_node bodyNode = htmlNode.append_child("body");
     pugi::xml_node titleNode = bodyNode.append_child("p");
@@ -67,10 +64,49 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
         parentNode.append_child(pugi::node_pcdata).set_value(data._character->_name.toStdString().c_str());
 
         pugi::xml_node tdLineNode = trFillingNode.append_child("td");
-        tdLineNode.append_child(pugi::node_pcdata).set_value(data._line.toStdString().c_str());
+        if (!useUnderline) {
+            tdLineNode.append_child(pugi::node_pcdata).set_value(data._line.toStdString().c_str());
+            continue;
+        }
+
+
+        if (data._line.size() == 0) {
+            continue;
+        }
+
+        int firstUnderline = data._line[0] == '_' ? 0 : -1;
+        int firstRegular = data._line[0] == '_' ? -1 : 0;
+        for (int iUnderline = 1; iUnderline < data._line.size(); ++iUnderline) {
+            if (data._line[iUnderline] != '_') {
+                continue;
+            }
+
+            if (firstUnderline == -1) {
+                firstUnderline = iUnderline + 1;
+                QString temp = data._line.sliced(firstRegular, iUnderline - firstRegular);
+                tdLineNode.append_child(pugi::node_pcdata).set_value(temp.toStdString().c_str());
+
+                firstRegular = -1;
+            }
+            else {
+                firstRegular = iUnderline + 1;
+                QString temp = data._line.sliced(firstUnderline, iUnderline - firstUnderline);
+
+                pugi::xml_node bLineNode = tdLineNode.append_child("b");
+                pugi::xml_node uLineNode = bLineNode.append_child("u");
+                uLineNode.append_child(pugi::node_pcdata).set_value(temp.toStdString().c_str());
+
+                firstUnderline = -1;
+            }
+        }
+
+        if (firstRegular != -1) {
+            QString temp = data._line.sliced(firstRegular, data._line.size() - firstRegular);
+            tdLineNode.append_child(pugi::node_pcdata).set_value(temp.toStdString().c_str());
+        }
     }
 
-    doc.save_file(fileName.toStdString().c_str());
+    doc.save_file(fileName.toStdString().c_str(), "\t", pugi::format_raw);
 
     QMessageBox msgBox;
     msgBox.setWindowTitle("Выгрузка в doc");

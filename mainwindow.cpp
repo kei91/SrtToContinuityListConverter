@@ -90,7 +90,7 @@ void MainWindow::OnExportToDocClicked()
                 ui->FemaleLineUnderLine->isChecked(),
                 ui->FemaleLineItalic->isChecked());
 
-    emit OnExportRequired(fileName, ui->DocNameLine->text(), _subDataController.GetSubData(), style);
+    emit OnExportRequired(fileName, ui->DocNameLine->text(), _subDataController.GetSubData(), style, ui->TextUnderline->isChecked());
 }
 
 void MainWindow::OnNamesTableCellClicked(int row, int column)

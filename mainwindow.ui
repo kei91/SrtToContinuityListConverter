@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>552</width>
-    <height>584</height>
+    <width>550</width>
+    <height>612</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>450</x>
-      <y>513</y>
+      <y>541</y>
       <width>93</width>
       <height>28</height>
      </rect>
@@ -54,7 +54,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>513</y>
+      <y>541</y>
       <width>431</width>
       <height>28</height>
      </rect>
@@ -268,13 +268,29 @@
      </property>
     </widget>
    </widget>
+   <widget class="QCheckBox" name="TextUnderline">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>511</y>
+      <width>381</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Выделять текст, если по бокам есть символ &quot;_&quot; (пример, Ле_о_н)</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>552</width>
+     <width>550</width>
      <height>22</height>
     </rect>
    </property>
