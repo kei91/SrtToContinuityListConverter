@@ -110,7 +110,7 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
         }
     }
 
-    doc.save_file(fileName.toStdString().c_str(), "\t", pugi::format_raw | pugi::format_no_declaration);
+    doc.save_file(fileName.toLocal8Bit().data(), "\t", pugi::format_raw | pugi::format_no_declaration);
 
     QMessageBox msgBox;
     msgBox.setWindowTitle("Выгрузка в doc");
