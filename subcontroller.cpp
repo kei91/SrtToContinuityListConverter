@@ -96,6 +96,10 @@ void CSubController::ExtractDataFromFile(const QString& filename, SubPauseInfo p
                     lastCharacteName = name;
                     prevTime = endTime;
                   }
+                  else if (_subData.size() > 0){
+                      _subData[_subData.size() - 1]._line += " " + line;
+                  }
+
               }
           }
 
