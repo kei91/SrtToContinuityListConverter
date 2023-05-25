@@ -75,13 +75,13 @@ void CSubController::ExtractDataFromFile(const QString& filename, SubPauseInfo p
                             qint64 timeDiff = prevTime.msecsTo(startTime);
                             QString splitStr("");
                             if (timeDiff >= pauseInfo.smallPauseStart && timeDiff <= pauseInfo.smallPauseEnd) {
-                                splitStr = "/";
+                                splitStr = " /";
                             }
                             else if (timeDiff > pauseInfo.smallPauseEnd && timeDiff <= pauseInfo.bigPauseStart) {
-                                splitStr = "// ";
+                                splitStr = " // ";
                             }
                             else if (timeDiff > pauseInfo.bigPauseStart) {
-                                splitStr = "//" + (startTime.hour() == 0 ? startTime.toString("mm:ss") : startTime.toString("hh:mm:ss"));
+                                splitStr = " // " + (startTime.hour() == 0 ? startTime.toString("mm:ss") : startTime.toString("hh:mm:ss")) + " ";
                             }
 
                             addToSameCharacter = true;
