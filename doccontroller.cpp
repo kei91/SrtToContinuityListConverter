@@ -24,7 +24,8 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
     pugi::xml_node headNode = htmlNode.append_child("head");
     pugi::xml_node styleNode = headNode.append_child("style");
     styleNode.append_child(pugi::node_pcdata).set_value("body { font-family: Times New Roman;  font-size: 14pt;  line-height: 1.5; } \
-                                                         table, tr, td { border: 1px solid black; border-collapse: collapse; ");
+                                                         table, th, td { border: 1px solid black; border-collapse: collapse; } \
+                                                         th, td { border: 1px solid black; } ");
 
     pugi::xml_node bodyNode = htmlNode.append_child("body");
     pugi::xml_node titleNode = bodyNode.append_child("p");
@@ -38,7 +39,7 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
     pugi::xml_node trTitleNode = tableNode.append_child("tr");
     std::vector<QString> titles {"Тайм-код", "Герои", "Реплики"};
     for (QString& tdTitle : titles) {
-        pugi::xml_node tdTitleNode = trTitleNode.append_child("td");
+        pugi::xml_node tdTitleNode = trTitleNode.append_child("th");
         tdTitleNode.append_child(pugi::node_pcdata).set_value(tdTitle.toStdString().c_str());
     }
 
@@ -46,9 +47,11 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
         pugi::xml_node trFillingNode = tableNode.append_child("tr");
 
         pugi::xml_node tdTimestampNode = trFillingNode.append_child("td");
+        tdTimestampNode.append_attribute("valign") = "top";
         tdTimestampNode.append_child(pugi::node_pcdata).set_value(data._startTime.toString("hh:mm:ss").toStdString().c_str());
 
         pugi::xml_node tdNameNode = trFillingNode.append_child("td");
+        tdNameNode.append_attribute("valign") = "top";
         pugi::xml_node parentNode = tdNameNode;
         if (data._character->_gender == Gender::female) {
             if (style.isBold) {
