@@ -23,7 +23,7 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
     htmlNode.append_attribute("xmlns") = "http://www.w3.org/TR/REC-html40";
     pugi::xml_node headNode = htmlNode.append_child("head");
     pugi::xml_node styleNode = headNode.append_child("style");
-    styleNode.append_child(pugi::node_pcdata).set_value("body { font-family: Times New Roman;  font-size: 14pt;  line-height: 1.5; } \
+    styleNode.append_child(pugi::node_pcdata).set_value("body { font-family: Times New Roman;  font-size: 14pt;  line-height: 150%; } \
                                                          table, th, td { border: 1px solid black; border-collapse: collapse; } \
                                                          th, td { border: 1px solid black; } ");
 
@@ -32,6 +32,27 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
     titleNode.append_attribute("align") = "right";
     pugi::xml_node boldTitleNode = titleNode.append_child("b");
     boldTitleNode.append_child(pugi::node_pcdata).set_value(strTitle.toStdString().c_str());
+
+    std::set<QString> femaleNames, maleNames;
+    for (const CSubData& data : subData) {
+        if (data._character->_gender == Gender::female) {
+            femaleNames.insert(data._character->_name);
+        }
+        else {
+            maleNames.insert(data._character->_name);
+        }
+
+    }
+
+    for (const QString& name : femaleNames) {
+        pugi::xml_node characterNameNode = bodyNode.append_child("p");
+        characterNameNode.append_child(pugi::node_pcdata).set_value(name.toStdString().c_str());
+    }
+
+    for (const QString& name : maleNames) {
+        pugi::xml_node characterNameNode = bodyNode.append_child("p");
+        characterNameNode.append_child(pugi::node_pcdata).set_value(name.toStdString().c_str());
+    }
 
     pugi::xml_node tableNode = bodyNode.append_child("table");
     tableNode.append_attribute("width") = "100%";
