@@ -7,7 +7,7 @@ const QString Utils::GetFileName(const QString& path)
                                 nullptr,
                                 QFileDialog::tr("Open File"),
                                 path.isEmpty() ? QDir::currentPath() : path,
-                                QFileDialog::tr("Subtitles (*.srt)")
+                                QFileDialog::tr("Subtitles (*.srt *.ass)")
                             );
 }
 

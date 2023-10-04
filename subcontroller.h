@@ -2,6 +2,7 @@
 #define SUBCONTROLLER_H
 
 #include <QObject>
+#include <QFile>
 #include "subdata.h"
 #include <vector>
 
@@ -30,6 +31,12 @@ public:
 
 public slots:
     void ExtractDataFromFile(const QString& filename, SubPauseInfo pauseInfo);
+
+private:
+    void ExtractDataFromSRT(QFile& inputFile, SubPauseInfo pauseInfo);
+    void ExtractDataFromASS(QFile& inputFile, SubPauseInfo pauseInfo);
+
+    bool AddToSameCharacter(SubPauseInfo pauseInfo, QTime startTime, QTime endTime, const QString& text);
 
 private:
     std::vector<CSubData> _subData;
