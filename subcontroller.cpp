@@ -137,6 +137,9 @@ void CSubController::ExtractDataFromASS(QFile& inputFile, SubPauseInfo pauseInfo
            QString endTimeString = dataStr[2];
            QString characterName = dataStr[4];
            QString text = dataStr[9];
+           for(int i = 10; i < dataStr.count(); ++i) {
+               text += ", " + dataStr[i];
+           }
 
            if (characterName == "") {
                qint32 indexStartName = line.indexOf("[");
