@@ -152,7 +152,7 @@ void CSubController::ExtractDataFromASS(QFile& inputFile, SubPauseInfo pauseInfo
            }
 
            QTime startTime = QTime::fromString(startTimeString, "h:m:s.z");
-           QTime endTime = QTime::fromString(startTimeString, "h:m:s.z");
+           QTime endTime = QTime::fromString(endTimeString, "h:m:s.z");
 
            qDebug() << "time" << startTime.toString() << Qt::endl;
 
