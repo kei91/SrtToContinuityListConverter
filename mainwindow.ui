@@ -80,7 +80,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Название:</string>
+     <string>Name:</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="DocNameLine">
@@ -103,7 +103,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Использовать знаки пауз</string>
+     <string>Use pause symbols</string>
     </property>
     <property name="checked">
      <bool>true</bool>
@@ -132,7 +132,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Маленькая пауза с&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Small pause from:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -145,7 +145,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;до&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;till:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
@@ -158,7 +158,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;мс&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ms&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="SmallPauseEnd">
@@ -184,7 +184,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Большая пауза с&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Big pause from:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="BigPauseStart">
@@ -210,7 +210,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;мс&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ms&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
@@ -223,7 +223,7 @@
      </rect>
     </property>
     <property name="title">
-     <string>Выделение женских реплик</string>
+     <string>Highlight woman phrases as:</string>
     </property>
     <widget class="QCheckBox" name="FemaleLineBold">
      <property name="geometry">
@@ -235,7 +235,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Выделять жирным</string>
+      <string>Bold</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -251,7 +251,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Выделять подчеркнутым</string>
+      <string>Underlined</string>
      </property>
     </widget>
     <widget class="QCheckBox" name="FemaleLineItalic">
@@ -264,7 +264,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Выделять курсивным</string>
+      <string>Italic</string>
      </property>
     </widget>
    </widget>
@@ -278,7 +278,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Выделять текст, если по бокам есть символ &quot;_&quot; (пример, Ле_о_н)</string>
+     <string>Select text if it has the &quot;_&quot; symbol on either side (e.g. Le_o_n)</string>
     </property>
     <property name="checked">
      <bool>true</bool>

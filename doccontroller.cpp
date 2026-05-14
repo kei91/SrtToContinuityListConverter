@@ -58,7 +58,7 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
     tableNode.append_attribute("width") = "100%";
 
     pugi::xml_node trTitleNode = tableNode.append_child("tr");
-    std::vector<QString> titles {"Тайм-код", "Герои", "Реплики"};
+    std::vector<QString> titles {"Timecode", "Characters", "Replicas"};
     for (QString& tdTitle : titles) {
         pugi::xml_node tdTitleNode = trTitleNode.append_child("th");
         tdTitleNode.append_child(pugi::node_pcdata).set_value(tdTitle.toStdString().c_str());
@@ -134,7 +134,7 @@ void CDocController::ConvertSubDataToDoc(const QString& fileName, const QString&
     doc.save_file(fileName.toLocal8Bit().data(), "\t", pugi::format_raw | pugi::format_no_declaration);
 
     QMessageBox msgBox;
-    msgBox.setWindowTitle("Выгрузка в doc");
-    msgBox.setText("Выгрузка в doc завершена");
+    msgBox.setWindowTitle("Export to doc");
+    msgBox.setText("Export is completed");
     msgBox.exec();
 }

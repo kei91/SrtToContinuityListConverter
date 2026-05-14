@@ -35,7 +35,7 @@ void MainWindow::UpdateTable()
 {
     ui->NamesTable->setColumnCount(3);
     ui->NamesTable->setShowGrid(true);
-    ui->NamesTable->setHorizontalHeaderLabels(QStringList({"№", "Имя", "Гендер"}));
+    ui->NamesTable->setHorizontalHeaderLabels(QStringList({"№", "Name", "Gender"}));
     ui->NamesTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     QHeaderView* header = ui->NamesTable->horizontalHeader();
@@ -54,7 +54,6 @@ void MainWindow::UpdateTable()
         ++row;
     }
 
-    // Ресайзим колонки по содержимому
      ui->NamesTable->resizeColumnsToContents();
 }
 
