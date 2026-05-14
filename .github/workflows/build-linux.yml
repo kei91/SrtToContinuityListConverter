@@ -1,0 +1,28 @@
+name: Build Linux
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Qt6
+        run: |
+          sudo apt update
+          sudo apt install -y qt6-base-dev qt6-tools-dev qt6-tools-dev-tools libqt6xml6
+
+      - name: Build
+        run: |
+          qmake6 SrtToContinuityListConverter.pro
+          make
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SrtToContinuityListConverter-linux
+          path: SrtToContinuityListConverter
