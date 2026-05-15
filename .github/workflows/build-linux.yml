@@ -3,7 +3,13 @@ name: Build Linux
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
   pull_request:
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
 
 jobs:
   build:

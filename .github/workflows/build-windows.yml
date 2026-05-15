@@ -3,7 +3,13 @@ name: Build Windows
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
   pull_request:
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
 
 jobs:
   build:
@@ -24,8 +30,15 @@ jobs:
           qmake SrtToContinuityListConverter.pro
           nmake
 
+      - name: Deploy Qt dependencies
+        shell: cmd
+        run: |
+          mkdir deploy
+          copy release\SrtToContinuityListConverter.exe deploy\
+          windeployqt --release deploy\SrtToContinuityListConverter.exe
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: SrtToContinuityListConverter-windows
-          path: release\SrtToContinuityListConverter.exe
+          path: deploy\
